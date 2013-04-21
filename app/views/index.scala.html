@@ -1,7 +1,21 @@
-@(message: String)
+@(ideas: List[Idea], ideaForm: Form[String])
 
-@main("Welcome to Play 2.1") {
-    
-    @play20.welcome(message)
-    
+@import helper._
+
+@main("Idea list") {
+
+  <h1>@ideas.size idea(s)</h1>
+  <ul>
+    @ideas.map { idea =>
+      <li>
+        @idea.label
+      </li>
+    }
+  </ul>
+
+  <h2>Add a new task</h2>
+  @form(routes.Application.create) {
+    @inputText(ideaForm("label"))
+    <input type="submit" value="Create">
+  }
 }
